@@ -1,0 +1,244 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const metrics = [
+  {
+    label: 'Timeline',
+    value: '6 Months',
+    highlight: 'From application to approval',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+  },
+  {
+    label: 'Team Size',
+    value: '15+',
+    highlight: 'Successfully relocated',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+  },
+  {
+    label: 'Investment',
+    value: '$2M',
+    highlight: 'Capital secured',
+    icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+  }
+];
+
+const timeline = [
+  {
+    date: 'Month 1',
+    title: 'Initial Assessment & Strategy',
+    description: 'Comprehensive evaluation of business plan and immigration options.'
+  },
+  {
+    date: 'Month 2',
+    title: 'Documentation & Business Plan Refinement',
+    description: 'Detailed documentation preparation, market analysis, and financial validation.'
+  },
+  {
+    date: 'Month 4',
+    title: 'Application Submission',
+    description: 'Strategic submission of all required documentation to immigration authorities.'
+  },
+  {
+    date: 'Month 5-6',
+    title: 'Processing & Approval',
+    description: 'Regular follow-ups, status monitoring, and successful approval obtained.'
+  }
+];
+
+const testimonials = [
+  {
+    quote: "The firm's expertise was instrumental in our successful expansion to Canada. Their strategic approach and attention to detail made a complex process manageable and efficient.",
+    author: "Alex M.",
+    position: "CEO",
+    company: "Tech Solutions Inc."
+  },
+  {
+    quote: "The team's deep understanding of both immigration law and business needs helped us navigate the process seamlessly. They were always one step ahead.",
+    author: "Sarah L.",
+    position: "CTO",
+    company: "Tech Solutions Inc."
+  }
+];
+---
+
+<Layout 
+  title="Startup Success Story | Business Immigration Case Study"
+  description="Discover how we helped a tech startup establish their Canadian presence, relocate 15 team members, and secure $2M in investment through strategic immigration planning."
+>
+  <div class="min-h-screen bg-white">
+    {/* Hero Section */}
+    <div class="relative pt-20 pb-12 border-b border-gray-100">
+      <div class="max-w-[800px] mx-auto px-4">
+        <div class="text-center">
+          <div class="inline-block bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
+            Business Immigration Case Study
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Tech Startup Success Story</h1>
+          <p class="text-lg text-gray-600">
+            How we helped a growing tech company establish their Canadian presence and build their dream team
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Key Metrics */}
+    <div class="py-12 bg-gray-50">
+      <div class="max-w-[1000px] mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {metrics.map(metric => (
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={metric.icon} />
+                </svg>
+              </div>
+              <h3 class="text-base font-medium text-gray-900 text-center mb-1">{metric.label}</h3>
+              <div class="text-2xl font-bold text-red-600 text-center mb-1">{metric.value}</div>
+              <p class="text-sm text-gray-500 text-center">{metric.highlight}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* Challenge & Solution */}
+    <div class="py-12">
+      <div class="max-w-[1000px] mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Challenge */}
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <span class="text-red-600 text-xl font-bold mr-2">+</span>
+              <h2 class="text-xl font-bold">The Challenge</h2>
+            </div>
+            <p class="text-gray-600 mb-6 text-base">
+              A rapidly growing tech startup faced complex immigration challenges while planning their expansion into the Canadian market. They needed to:
+            </p>
+            <ul class="space-y-3">
+              {['Relocate their core development team of 15 members', 'Establish a Canadian subsidiary', 'Secure necessary permits and visas quickly', 'Navigate complex compliance requirements'].map(item => (
+                <li class="flex items-start">
+                  <span class="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                  </span>
+                  <span class="text-gray-600 text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solution */}
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <span class="text-green-600 text-xl font-bold mr-2">✓</span>
+              <h2 class="text-xl font-bold">Our Solution</h2>
+            </div>
+            <p class="text-gray-600 mb-6 text-base">
+              We developed a comprehensive immigration strategy that aligned with their business objectives:
+            </p>
+            <ul class="space-y-3">
+              {['Utilized the Start-up Visa Program for key founders', 'Leveraged Global Talent Stream for technical team members', 'Provided guidance on business structure and compliance', 'Coordinated with various stakeholders for seamless execution'].map(item => (
+                <li class="flex items-start">
+                  <span class="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <svg class="w-3 h-3 text-green-600" viewBox="0 0 12 12" fill="none">
+                      <path d="M10 3L4.5 8.5L2.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-gray-600 text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Timeline */}
+    <div class="py-12 bg-gray-50">
+      <div class="max-w-[800px] mx-auto px-4">
+        <h2 class="text-2xl font-bold text-center mb-8">Project Timeline</h2>
+        <div class="relative">
+          <div class="absolute left-8 md:left-1/2 h-full w-px bg-red-100"></div>
+          <div class="space-y-8">
+            {timeline.map((item, index) => (
+              <div class="relative flex items-start">
+                <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2">
+                  <div class="w-8 h-8 bg-white border-2 border-red-100 rounded-full flex items-center justify-center">
+                    <span class="text-red-600 font-bold text-sm">{index + 1}</span>
+                  </div>
+                </div>
+                <div class="ml-16 md:ml-0 md:w-1/2 md:pr-12 pb-8">
+                  <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <div class="text-red-600 text-sm font-medium mb-1">{item.date}</div>
+                    <h3 class="text-lg font-bold mb-2">{item.title}</h3>
+                    <p class="text-gray-600 text-base">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Results & Testimonials */}
+    <div class="py-12">
+      <div class="max-w-[1000px] mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Results */}
+          <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-lg p-6 text-white">
+            <h2 class="text-xl font-bold mb-6">Key Results</h2>
+            <ul class="space-y-4">
+              {[
+                'Successfully established Canadian presence within 6 months',
+                'Secured work permits for all 15 team members',
+                'Facilitated $2M investment from Canadian investors'
+              ].map(result => (
+                <li class="flex items-start">
+                  <span class="w-5 h-5 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none">
+                      <path d="M10 3L4.5 8.5L2.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-base">{result}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Testimonials */}
+          <div class="space-y-6">
+            {testimonials.map(testimonial => (
+              <div class="bg-gray-50 rounded-lg p-6">
+                <svg class="w-6 h-6 text-red-200 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p class="text-gray-600 text-base italic mb-4">{testimonial.quote}</p>
+                <div class="font-semibold text-gray-900">{testimonial.author}</div>
+                <div class="text-sm text-gray-500">{testimonial.position}, {testimonial.company}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div class="py-12 bg-gray-50">
+      <div class="max-w-[600px] mx-auto px-4 text-center">
+        <h2 class="text-2xl font-bold mb-4">Ready to Start Your Success Story?</h2>
+        <p class="text-gray-600 mb-6">
+          Let us help you navigate the complexities of Canadian immigration and business expansion.
+        </p>
+        <a 
+          href="/contact" 
+          class="inline-flex items-center px-6 py-3 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition-colors text-base"
+        >
+          Schedule a Consultation
+          <svg class="w-4 h-4 ml-2" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8.293 2.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L12.586 8H3a1 1 0 110-2h9.586L8.293 1.707a1 1 0 010-1.414z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout> 

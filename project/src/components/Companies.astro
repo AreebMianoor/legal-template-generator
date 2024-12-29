@@ -1,0 +1,37 @@
+---
+const companies = [
+  {
+    name: 'Nomad Enterprise',
+    logo: '/nomad-enterprise-logo.svg'
+  },
+  {
+    name: 'Innogy',
+    logo: '/innogy-logo.svg'
+  },
+  {
+    name: 'Maidstone Borough Council',
+    logo: '/maidstone-borough-council logo.svg'
+  },
+  {
+    name: 'Raisio',
+    logo: '/raisio logo.svg'
+  }
+];
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Trusted By Leading Companies</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+      {companies.map(company => (
+        <div class="w-40 h-20 flex items-center justify-center">
+          <img 
+            src={company.logo} 
+            alt={`${company.name} logo`}
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

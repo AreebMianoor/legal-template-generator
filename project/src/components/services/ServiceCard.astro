@@ -1,0 +1,29 @@
+---
+import Icon from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<div class="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow">
+  <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-6">
+    <svg class="w-6 h-6 text-red-800" viewBox="0 0 24 24">
+      {icon === 'mdi:home' && (
+        <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5Z"/>
+      )}
+      {icon === 'mdi:file-document' && (
+        <path fill="currentColor" d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12Z"/>
+      )}
+      {icon === 'mdi:briefcase' && (
+        <path fill="currentColor" d="M10 2h4a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8c0-1.11.89-2 2-2h4V4c0-1.11.89-2 2-2m4 4V4h-4v2h4Z"/>
+      )}
+    </svg>
+  </div>
+  <h3 class="text-xl font-semibold mb-4">{title}</h3>
+  <p class="text-gray-600">{description}</p>
+</div>

@@ -1,0 +1,30 @@
+---
+const navItems = [
+  { name: 'Services', href: '#services' },
+  { name: 'Case Studies', href: '/case-studies' },
+  { name: 'Our Team', href: '#team' },
+  { name: 'Contact', href: '#contact' }
+];
+---
+
+<header class="fixed w-full bg-white shadow-sm z-50">
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <div class="h-12 w-12 bg-red-800 text-white flex items-center justify-center text-2xl font-bold rounded">L</div>
+        <span class="ml-3 text-xl font-semibold text-red-800">Immigration Law Firm</span>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-8">
+        {navItems.map(item => (
+          <a href={item.href} class="text-gray-700 hover:text-red-800 transition-colors">
+            {item.name}
+          </a>
+        ))}
+        <a href="tel:+19026000581" class="bg-red-800 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors">
+          Call Now 24/7
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

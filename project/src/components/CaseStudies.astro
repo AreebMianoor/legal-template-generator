@@ -1,0 +1,64 @@
+---
+const caseStudies = [
+  {
+    title: 'Startup Success Story',
+    category: 'Business Immigration',
+    description: 'How we helped a tech startup establish their Canadian presence',
+    image: '/nomad-enterprise-logo.svg',
+    link: '/case-studies/startup-success',
+    metrics: ['6 months process', '15 team members relocated', '$2M investment secured']
+  },
+  {
+    title: 'Family Reunification',
+    category: 'Permanent Residence',
+    description: 'Successfully reuniting families through Express Entry',
+    image: '/innogy-logo.svg',
+    link: '/case-studies/family-reunification',
+    metrics: ['4 months processing', '100% success rate', 'Multiple dependents']
+  },
+  {
+    title: 'Global Talent Acquisition',
+    category: 'Work Permits',
+    description: 'Streamlining work permits for international talent',
+    image: '/raisio logo.svg',
+    link: '/case-studies/global-talent',
+    metrics: ['Fast-track processing', '50+ permits secured', '12 countries']
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-16">Case Studies</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {caseStudies.map(study => (
+        <a href={study.link} class="group">
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+            <div class="h-48 bg-gray-50 flex items-center justify-center p-8">
+              <img 
+                src={study.image} 
+                alt={`${study.title} case study`}
+                class="max-h-full max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
+            <div class="p-6">
+              <span class="text-red-600 text-sm font-medium">{study.category}</span>
+              <h3 class="text-xl font-semibold mt-2 mb-3 group-hover:text-red-600 transition-colors">{study.title}</h3>
+              <p class="text-gray-600 mb-4">{study.description}</p>
+              <div class="space-y-2">
+                {study.metrics.map(metric => (
+                  <div class="flex items-center text-sm text-gray-500">
+                    <svg class="w-4 h-4 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    {metric}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
