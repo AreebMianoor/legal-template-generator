@@ -78,20 +78,6 @@ The goal is to democratize access to advanced legal tech tools, allowing firms o
 - Multi-language support
 - Advanced analytics dashboard
 
-## ✨ Latest Feature: Site Request Form
-
-We've just added a new feature that allows law firms to request their custom website through a user-friendly form:
-
-🔗 **Access the form at**: `/request-site`
-
-### Form Features:
-- 📝 Multi-step form process for better UX
-- 🎨 Customizable design preferences
-- 📋 Service selection
-- 🏗️ Content section customization
-- 🎯 Instant URL generation
-- ⚡ Serverless form processing
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -99,11 +85,12 @@ We've just added a new feature that allows law firms to request their custom web
 - npm or yarn
 - Git
 
-### Windows Setup
+### Installation
+
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
-   cd legal-tech-platform
+   git clone https://github.com/AreebMianoor/legal-template-generator.git
+   cd legal-template-generator
    ```
 
 2. Install dependencies:
@@ -111,132 +98,43 @@ We've just added a new feature that allows law firms to request their custom web
    npm install
    ```
 
-3. Start development server:
+3. Create environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Start development server:
    ```bash
    npm run dev
    ```
 
-### macOS Setup
-1. Clone the repository:
-   ```bash
-   git clone [repository-url]
-   cd legal-tech-platform
-   ```
+### Environment Variables
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
-
-### Environment Variables Setup
-
-Create a `.env` file in the root directory with the following variables:
+Required environment variables:
 
 ```env
 # Required for development
 SITE_URL=http://localhost:4321
-
-# Netlify Function URLs (update after deployment)
 NETLIFY_FUNCTION_URL=/.netlify/functions
 
-# Optional: AI Integration (if using AI features)
-OPENAI_API_KEY=your_openai_api_key
-GEMINI_API_KEY=your_gemini_api_key
+# MongoDB connection (for site generation)
+MONGODB_URI=your_mongodb_uri
 
-# Optional: Analytics (if using analytics)
-GOOGLE_ANALYTICS_ID=your_ga_id
-
-# Example values for local development:
-# SITE_URL=http://localhost:4321
-# NETLIFY_FUNCTION_URL=/.netlify/functions
-# OPENAI_API_KEY=sk-xxxxx...
-# GEMINI_API_KEY=AI-xxxx...
+# Netlify deployment
+NETLIFY_AUTH_TOKEN=your_netlify_token
+TEMPLATE_REPO=your_template_repo
 ```
 
-> **Note**: Never commit your `.env` file to version control. The above values are examples only.
+### Deployment
 
-For production deployment on Netlify:
-1. Go to your site's dashboard
-2. Navigate to Site Settings > Environment Variables
-3. Add each variable from your `.env` file
-4. Update `SITE_URL` to your production URL
-5. Deploy your site to apply the changes
+The project is configured for seamless deployment on Netlify:
 
-### Using the Site Request Form
-
-1. Visit `/request-site` on your deployed site
-2. Complete the three-step form:
-   - **Step 1**: Enter your firm's basic information
-   - **Step 2**: Select your services and content sections
-   - **Step 3**: Choose your design preferences
-3. Submit the form
-4. Receive confirmation with your site details
-
-### Local Development of Form
-
-To test the form locally:
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Start the Netlify dev server:
-```bash
-netlify dev
-```
-
-3. Visit `http://localhost:8888/request-site`
-
-### Form Technical Details
-
-The form submission is handled by Netlify Functions:
-- Function location: `netlify/functions/create-site.js`
-- Endpoint: `/.netlify/functions/create-site`
-- Method: `POST`
-- Response: JSON with site creation details
-
-## 🔧 Customization
-
-The platform is designed for easy customization:
-
-- **Colors**: Modify `tailwind.config.js`
-- **Content**: Update content in `src/content`
-- **Layout**: Adjust components in `src/components`
-- **AI Settings**: Configure in `.env` file (template provided)
-
-## 🔜 Roadmap
-
-- Enhanced AI integration with GPT-4 and Claude
-- Automated legal document generation
-- Client portal with secure document sharing
-- Integration with popular legal practice management software
-- Advanced analytics and insights dashboard
-- Multi-language AI support
-
-## 🤝 Contributing
-
-This project is open source and welcomes contributions. Whether you're fixing bugs, adding new features, or improving documentation, your contributions are welcome.
-
-## 📞 Contact
-
-For professional inquiries or collaboration opportunities, connect with me on LinkedIn:
-[Areeb Mianoor](https://www.linkedin.com/in/areebmianoor)
-
-## 🌟 Vision for the Future
-
-This platform is more than just a website generator - it's a movement towards democratizing legal tech. By making sophisticated AI tools and modern web presence accessible to all legal professionals, we're helping bridge the technology gap in the legal industry.
-
-The platform is designed to grow with the rapidly evolving AI landscape, ready to integrate new technologies as they emerge. From automated client intake to AI-powered legal research assistance, the possibilities are limitless.
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+1. Connect your repository to Netlify
+2. Configure environment variables in Netlify dashboard
+3. Deploy using the following build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: 18.x
 
 ## 📁 Project Structure
 
@@ -247,7 +145,9 @@ This project is open source and available under the MIT License.
 │   │   ├── Hero.astro
 │   │   ├── Services.astro
 │   │   ├── CaseStudies.astro
-│   │   └── ContactForm.astro
+│   │   └── footer/
+│   │       ├── ContactInfo.astro
+│   │       └── SocialLinks.astro
 │   ├── layouts/            # Page layouts
 │   │   └── Layout.astro
 │   ├── pages/             # Route pages
@@ -255,53 +155,36 @@ This project is open source and available under the MIT License.
 │   │   ├── case-studies/
 │   │   └── request-site.astro
 │   └── content/           # Content collections
-│       ├── case-studies/
-│       └── services/
 ├── public/                # Static assets
-│   ├── images/
-│   └── fonts/
 ├── netlify/              # Serverless functions
 │   └── functions/
+│       └── create-site.js
 ├── astro.config.mjs      # Astro configuration
-├── tailwind.config.js    # Tailwind configuration
+├── tailwind.config.mjs   # Tailwind configuration
 └── package.json          # Project dependencies
 ```
 
-### Key Technical Features
-- **Content Management**: MDX-based content collections
-- **Dynamic Routing**: Automatic route generation for case studies
-- **Form Handling**: Serverless function integration
-- **SEO Optimization**: Built-in meta tags and structured data
-- **Asset Optimization**: Automatic image optimization
-- **CSS Utilities**: Tailwind CSS for styling
-- **Type Safety**: TypeScript support
-- **Build Optimization**: Automatic code splitting and bundling
+### Key Files
 
-### Performance Features
-- Optimized asset loading
-- Minimal JavaScript footprint
-- Static site generation
-- Efficient caching strategies
-- Lazy-loaded images
-- Minified CSS and JS
+- `src/pages/request-site.astro`: Multi-step form for website generation
+- `netlify/functions/create-site.js`: Serverless function for site creation
+- `astro.config.mjs`: Astro and Netlify adapter configuration
+- `tailwind.config.mjs`: Tailwind CSS customization
 
----
+## 🔧 Customization
 
-Built with ❤️ for the legal tech community 
+The platform is designed for easy customization:
 
-### Testing the Site Request Form
+- **Colors**: Modify `tailwind.config.mjs`
+- **Content**: Update content in `src/content`
+- **Layout**: Adjust components in `src/components`
+- **AI Settings**: Configure in `.env` file
 
-1. Navigate to `/request-site` on your deployed site
-2. Fill out the three-step form:
-   - Step 1: Basic firm information
-   - Step 2: Select services and content sections
-   - Step 3: Choose design preferences
-3. Submit the form to receive your site configuration
+## 📄 License
 
-### Deployment Notes
+This project is open source and available under the MIT License.
 
-The site request form uses Netlify Functions for processing. Ensure your Netlify deployment has:
-- Functions directory set to `netlify/functions`
-- Environment variables properly configured
-- Build command set to `npm run build`
-- Publish directory set to `dist` 
+## 📞 Contact
+
+For professional inquiries or collaboration opportunities, connect with me on LinkedIn:
+[Areeb Mianoor](https://www.linkedin.com/in/areebmianoor) 
