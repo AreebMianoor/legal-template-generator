@@ -62,6 +62,14 @@ The goal is to democratize access to advanced legal tech tools, allowing firms o
 - Contact form integration
 - Call button functionality
 - Netlify deployment pipeline
+- **Site Request Form** (/request-site):
+  - Multi-step form process
+  - Basic information collection
+  - Service selection
+  - Content section customization
+  - Color scheme selection
+  - Automated URL generation
+  - Serverless form processing
 
 🔄 **In Progress**
 - AI phone agent integration
@@ -70,7 +78,21 @@ The goal is to democratize access to advanced legal tech tools, allowing firms o
 - Multi-language support
 - Advanced analytics dashboard
 
-## 🚦 Getting Started
+## ✨ Latest Feature: Site Request Form
+
+We've just added a new feature that allows law firms to request their custom website through a user-friendly form:
+
+🔗 **Access the form at**: `/request-site`
+
+### Form Features:
+- 📝 Multi-step form process for better UX
+- 🎨 Customizable design preferences
+- 📋 Service selection
+- 🏗️ Content section customization
+- 🎯 Instant URL generation
+- ⚡ Serverless form processing
+
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v18 or later)
@@ -144,6 +166,40 @@ For production deployment on Netlify:
 3. Add each variable from your `.env` file
 4. Update `SITE_URL` to your production URL
 5. Deploy your site to apply the changes
+
+### Using the Site Request Form
+
+1. Visit `/request-site` on your deployed site
+2. Complete the three-step form:
+   - **Step 1**: Enter your firm's basic information
+   - **Step 2**: Select your services and content sections
+   - **Step 3**: Choose your design preferences
+3. Submit the form
+4. Receive confirmation with your site details
+
+### Local Development of Form
+
+To test the form locally:
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the Netlify dev server:
+```bash
+netlify dev
+```
+
+3. Visit `http://localhost:8888/request-site`
+
+### Form Technical Details
+
+The form submission is handled by Netlify Functions:
+- Function location: `netlify/functions/create-site.js`
+- Endpoint: `/.netlify/functions/create-site`
+- Method: `POST`
+- Response: JSON with site creation details
 
 ## 🔧 Customization
 
@@ -232,3 +288,20 @@ This project is open source and available under the MIT License.
 ---
 
 Built with ❤️ for the legal tech community 
+
+### Testing the Site Request Form
+
+1. Navigate to `/request-site` on your deployed site
+2. Fill out the three-step form:
+   - Step 1: Basic firm information
+   - Step 2: Select services and content sections
+   - Step 3: Choose design preferences
+3. Submit the form to receive your site configuration
+
+### Deployment Notes
+
+The site request form uses Netlify Functions for processing. Ensure your Netlify deployment has:
+- Functions directory set to `netlify/functions`
+- Environment variables properly configured
+- Build command set to `npm run build`
+- Publish directory set to `dist` 

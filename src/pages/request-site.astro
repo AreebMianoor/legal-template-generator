@@ -113,6 +113,15 @@ const contentSections = [
               placeholder="123 Law Street, Suite 100&#10;City, Province A1B 2C3"
             ></textarea>
           </div>
+
+          <div class="flex justify-end pt-6">
+            <button 
+              type="button"
+              class="bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg next-step"
+            >
+              Next Step
+            </button>
+          </div>
         </div>
 
         <!-- Step 2: Services & Content -->
@@ -152,6 +161,21 @@ const contentSections = [
                 </label>
               ))}
             </div>
+          </div>
+
+          <div class="flex justify-between pt-6">
+            <button 
+              type="button"
+              class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors font-medium text-lg prev-step"
+            >
+              Previous
+            </button>
+            <button 
+              type="button"
+              class="bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg next-step"
+            >
+              Next Step
+            </button>
           </div>
         </div>
 
@@ -212,22 +236,19 @@ const contentSections = [
             </div>
           </div>
 
-          <!-- Submit Button -->
-          <div class="pt-6 border-t">
-            <div class="flex justify-between">
-              <button 
-                type="button"
-                class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors font-medium text-lg prev-step"
-              >
-                Previous
-              </button>
-              <button 
-                type="submit"
-                class="bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg"
-              >
-                Create My Website
-              </button>
-            </div>
+          <div class="flex justify-between pt-6">
+            <button 
+              type="button"
+              class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors font-medium text-lg prev-step"
+            >
+              Previous
+            </button>
+            <button 
+              type="submit"
+              class="bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg"
+            >
+              Create My Website
+            </button>
           </div>
         </div>
       </form>
@@ -237,28 +258,28 @@ const contentSections = [
 
 <script>
   const form = document.getElementById('siteRequestForm');
-  const submitButton = form.querySelector('button[type="submit"]');
   const stepContents = document.querySelectorAll('.step-content');
+  const stepIndicators = document.querySelectorAll('.step-indicator');
   
   // Step Navigation
   let currentStep = 1;
   const totalSteps = 3;
   
   function updateStepIndicators() {
-    document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+    stepIndicators.forEach((indicator, index) => {
       if (index + 1 === currentStep) {
         indicator.classList.remove('bg-gray-200', 'text-gray-600');
         indicator.classList.add('bg-red-800', 'text-white');
       } else if (index + 1 < currentStep) {
         indicator.classList.remove('bg-gray-200', 'text-gray-600');
-        indicator.classList.add('bg-green-500', 'text-white');
+        indicator.classList.add('bg-green-600', 'text-white');
       } else {
-        indicator.classList.remove('bg-red-800', 'text-white', 'bg-green-500');
+        indicator.classList.remove('bg-red-800', 'bg-green-600', 'text-white');
         indicator.classList.add('bg-gray-200', 'text-gray-600');
       }
     });
   }
-
+  
   function showStep(step) {
     stepContents.forEach((content, index) => {
       if (index + 1 === step) {
@@ -267,194 +288,78 @@ const contentSections = [
         content.classList.add('hidden');
       }
     });
+    currentStep = step;
     updateStepIndicators();
   }
-
-  function validateStep(stepNumber) {
-    const stepContent = stepContents[stepNumber - 1];
-    const requiredInputs = stepContent.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-
-    requiredInputs.forEach(input => {
-      if (!input.value.trim()) {
-        isValid = false;
-        input.classList.add('border-red-500');
-        
-        // Add error message if not exists
-        if (!input.nextElementSibling?.classList.contains('error-message')) {
-          const errorMsg = document.createElement('p');
-          errorMsg.className = 'text-red-500 text-sm mt-1 error-message';
-          errorMsg.textContent = 'This field is required';
-          input.parentNode.insertBefore(errorMsg, input.nextSibling);
-        }
-      } else {
-        input.classList.remove('border-red-500');
-        const errorMsg = input.nextElementSibling;
-        if (errorMsg?.classList.contains('error-message')) {
-          errorMsg.remove();
-        }
-      }
-    });
-
-    return isValid;
-  }
-
-  // Add next buttons to steps
-  stepContents.forEach((content, index) => {
-    if (index < totalSteps - 1) {
-      const nextButton = document.createElement('button');
-      nextButton.type = 'button';
-      nextButton.className = 'w-full bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg mt-6';
-      nextButton.textContent = 'Next Step';
-      nextButton.onclick = () => {
-        if (validateStep(currentStep)) {
-          currentStep++;
-          showStep(currentStep);
-        }
-      };
-      content.appendChild(nextButton);
-    }
-  });
-
-  // Add input validation on change
-  document.querySelectorAll('input[required], textarea[required]').forEach(input => {
-    input.addEventListener('input', () => {
-      if (input.value.trim()) {
-        input.classList.remove('border-red-500');
-        const errorMsg = input.nextElementSibling;
-        if (errorMsg?.classList.contains('error-message')) {
-          errorMsg.remove();
-        }
+  
+  // Next/Previous buttons
+  document.querySelectorAll('.next-step').forEach(button => {
+    button.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        showStep(currentStep + 1);
       }
     });
   });
-
-  // Add previous step functionality
+  
   document.querySelectorAll('.prev-step').forEach(button => {
-    button.onclick = () => {
+    button.addEventListener('click', () => {
       if (currentStep > 1) {
-        currentStep--;
-        showStep(currentStep);
+        showStep(currentStep - 1);
       }
-    };
+    });
   });
-
-  // Show initial step
-  showStep(1);
-
-  // Form submission handler
+  
+  // Form submission
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
     
-    // Show loading state
+    const submitButton = form.querySelector('button[type="submit"]');
     submitButton.disabled = true;
-    submitButton.innerHTML = `
-      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      Creating Your Website...
-    `;
+    submitButton.textContent = 'Creating...';
     
     try {
-      // Gather form data
       const formData = new FormData(form);
       const data = {
         firmName: formData.get('firmName'),
-        urlPrefix: formData.get('urlPrefix'),
         email: formData.get('email'),
         phone: formData.get('phone'),
         address: formData.get('address'),
-        services: [...formData.getAll('services')],
-        sections: [...formData.getAll('sections')],
+        urlPrefix: formData.get('urlPrefix'),
+        services: Array.from(formData.getAll('services')),
+        sections: Array.from(formData.getAll('sections')),
         primaryColor: formData.get('primaryColor')
       };
       
       console.log('Submitting data:', data);
       
-      // Handle logo file
-      const logoFile = formData.get('logo');
-      if (logoFile && logoFile.size > 0) {
-        const reader = new FileReader();
-        const logoPromise = new Promise((resolve) => {
-          reader.onload = () => resolve(reader.result);
-          reader.readAsDataURL(logoFile);
-        });
-        data.logo = await logoPromise;
-      }
-      
-      // Submit to Netlify function
-      console.log('Calling Netlify function...');
       const response = await fetch('/.netlify/functions/create-site', {
         method: 'POST',
-        body: JSON.stringify(data),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
       
-      console.log('Response status:', response.status);
       const result = await response.json();
-      console.log('Response data:', result);
       
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Failed to create website');
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit form');
       }
       
       // Show success message
-      form.innerHTML = `
-        <div class="text-center py-12">
-          <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="text-2xl font-bold mb-4">Your Website Is Being Created!</h2>
-          <p class="text-gray-600 mb-4">
-            We'll send you an email at ${data.email} once your site is ready.
-          </p>
-          <div class="space-y-2 mb-8">
-            <p class="font-medium">Your website will be available at:</p>
-            <a 
-              href="${result.site.url}" 
-              target="_blank" 
-              class="text-red-800 hover:text-red-700 block"
-            >
-              ${result.site.url}
-            </a>
-            <p class="text-sm text-gray-500 mt-2">
-              (The site may take a few minutes to be fully deployed)
-            </p>
-          </div>
-          <div class="space-y-2">
-            <p class="font-medium">Manage your site at:</p>
-            <a 
-              href="${result.site.adminUrl}" 
-              target="_blank" 
-              class="text-red-800 hover:text-red-700 block"
-            >
-              Netlify Admin Dashboard
-            </a>
-          </div>
-          <a href="/" class="inline-block mt-8 text-red-800 hover:text-red-700">← Back to Home</a>
-        </div>
-      `;
-
-      // Open the new site in a new tab
-      window.open(result.site.url, '_blank');
-    } catch (error) {
-      console.error('Error details:', error);
-      // Show error message
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'bg-red-50 text-red-800 p-4 rounded-lg mt-6';
-      errorDiv.innerHTML = `
-        <p class="font-medium">Error creating your website</p>
-        <p class="text-sm">${error.message}</p>
-      `;
-      submitButton.parentNode.appendChild(errorDiv);
+      alert('Your website request has been submitted successfully! We will process it shortly.');
+      form.reset();
+      showStep(1);
       
-      // Reset button
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error.message || 'There was an error submitting your request. Please try again.');
+    } finally {
       submitButton.disabled = false;
-      submitButton.innerHTML = 'Create My Website';
+      submitButton.textContent = 'Create My Website';
     }
   });
+  
+  // Initialize
+  showStep(1);
 </script> 

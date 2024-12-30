@@ -4,16 +4,13 @@
   functions = "netlify/functions"
 
 [dev]
-  command = "astro dev"
-  targetPort = 4321
+  command = "npm run dev"
   port = 8888
-  autoLaunch = true
+  targetPort = 4321
+  publish = "dist"
   framework = "#custom"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  functions = "netlify/functions"
+  functionsPort = 9999
 
 [[redirects]]
   from = "/api/*"
@@ -21,8 +18,6 @@
   status = 200
 
 [[redirects]]
-  from = "/.netlify/functions/create-site"
-  to = "/.netlify/functions/create-site"
-  status = 200
-  force = true
-  methods = ["POST", "OPTIONS"] 
+  from = "/*"
+  to = "/index.html"
+  status = 200 

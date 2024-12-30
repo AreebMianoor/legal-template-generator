@@ -1,4 +1,4 @@
-export async function handler(event, context) {
+export const handler = async (event, context) => {
   // Set CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -44,13 +44,16 @@ export async function handler(event, context) {
     console.log('Received form data:', data);
 
     // Here we'll just return success for now
-    // In a real implementation, this would create the site
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         message: 'Site request received successfully',
-        data: data
+        data: {
+          ...data,
+          url: `https://${data.urlPrefix}.netlify.app`,
+          adminUrl: `https://app.netlify.com/sites/${data.urlPrefix}`
+        }
       }),
     };
   } catch (error) {
@@ -65,4 +68,4 @@ export async function handler(event, context) {
       }),
     };
   }
-} 
+}; 
