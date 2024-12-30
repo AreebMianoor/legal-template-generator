@@ -31,25 +31,25 @@ const contentSections = [
         <p class="text-xl text-gray-600">Complete the form below to get your customized immigration law website</p>
       </div>
 
-      <form id="siteRequestForm" class="bg-white rounded-xl shadow-lg p-8 space-y-8">
+      <form id="siteRequestForm" class="bg-white rounded-xl shadow-lg p-8">
         <!-- Progress Steps -->
         <div class="flex justify-between mb-8">
           <div class="flex-1 text-center">
-            <div class="w-8 h-8 bg-red-800 text-white rounded-full mx-auto flex items-center justify-center">1</div>
+            <div class="w-8 h-8 bg-red-800 text-white rounded-full mx-auto flex items-center justify-center step-indicator">1</div>
             <span class="text-sm mt-1">Basic Info</span>
           </div>
           <div class="flex-1 text-center">
-            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center">2</div>
+            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center step-indicator">2</div>
             <span class="text-sm mt-1">Content</span>
           </div>
           <div class="flex-1 text-center">
-            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center">3</div>
+            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center step-indicator">3</div>
             <span class="text-sm mt-1">Design</span>
           </div>
         </div>
 
         <!-- Step 1: Basic Information -->
-        <div class="space-y-6">
+        <div class="space-y-6 step-content">
           <h2 class="text-2xl font-semibold">Firm Information</h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -116,7 +116,7 @@ const contentSections = [
         </div>
 
         <!-- Step 2: Services & Content -->
-        <div class="space-y-6 pt-6 border-t">
+        <div class="space-y-6 step-content">
           <h2 class="text-2xl font-semibold">Services & Content</h2>
           
           <div>
@@ -156,7 +156,7 @@ const contentSections = [
         </div>
 
         <!-- Step 3: Design Preferences -->
-        <div class="space-y-6 pt-6 border-t">
+        <div class="space-y-6 step-content">
           <h2 class="text-2xl font-semibold">Design Preferences</h2>
           
           <div>
@@ -211,109 +211,117 @@ const contentSections = [
               </label>
             </div>
           </div>
-        </div>
 
-        <!-- Submit Button -->
-        <div class="pt-6 border-t">
-          <button 
-            type="submit"
-            class="w-full bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg"
-          >
-            Create My Website
-          </button>
-          <p class="text-center text-sm text-gray-500 mt-4">
-            Your website will be created on Netlify with all your customizations
-          </p>
+          <!-- Submit Button -->
+          <div class="pt-6 border-t">
+            <button 
+              type="submit"
+              class="w-full bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg"
+            >
+              Create My Website
+            </button>
+            <p class="text-center text-sm text-gray-500 mt-4">
+              Your website will be created on Netlify with all your customizations
+            </p>
+          </div>
         </div>
       </form>
     </div>
   </div>
-
-  <script>
-    const form = document.getElementById('siteRequestForm');
-    const submitButton = form.querySelector('button[type="submit"]');
-    
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      // Show loading state
-      submitButton.disabled = true;
-      submitButton.innerHTML = `
-        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        Creating Your Website...
-      `;
-      
-      try {
-        // Gather form data
-        const formData = new FormData(form);
-        const data = {
-          firmName: formData.get('firmName'),
-          urlPrefix: formData.get('urlPrefix'),
-          email: formData.get('email'),
-          phone: formData.get('phone'),
-          address: formData.get('address'),
-          services: [...formData.getAll('services')],
-          sections: [...formData.getAll('sections')],
-          primaryColor: formData.get('primaryColor')
-        };
-        
-        // Handle logo file
-        const logoFile = formData.get('logo');
-        if (logoFile && logoFile.size > 0) {
-          // Convert to base64 for storage
-          const reader = new FileReader();
-          const logoPromise = new Promise((resolve) => {
-            reader.onload = () => resolve(reader.result);
-            reader.readAsDataURL(logoFile);
-          });
-          data.logo = await logoPromise;
-        }
-        
-        // Submit to Netlify function
-        const response = await fetch('/.netlify/functions/create-site', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        const result = await response.json();
-        
-        if (!response.ok) throw new Error(result.message);
-        
-        // Show success message
-        form.innerHTML = `
-          <div class="text-center py-12">
-            <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h2 class="text-2xl font-bold mb-4">Your Website Is Being Created!</h2>
-            <p class="text-gray-600 mb-8">
-              We'll send you an email at ${data.email} once your site is ready.<br>
-              Your site will be available at: <strong>${data.urlPrefix}.netlify.app</strong>
-            </p>
-            <a href="/" class="text-red-800 hover:text-red-700">← Back to Home</a>
-          </div>
-        `;
-      } catch (error) {
-        console.error('Error:', error);
-        // Show error message
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'bg-red-50 text-red-800 p-4 rounded-lg mt-6';
-        errorDiv.innerHTML = `
-          <p class="font-medium">Error creating your website</p>
-          <p class="text-sm">${error.message}</p>
-        `;
-        submitButton.parentNode.appendChild(errorDiv);
-        
-        // Reset button
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Create My Website';
-      }
-    });
-  </script>
 </Layout> 
+
+<script>
+  const form = document.getElementById('siteRequestForm');
+  const submitButton = form.querySelector('button[type="submit"]');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log('Form submitted');
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Creating Your Website...
+    `;
+    
+    try {
+      // Gather form data
+      const formData = new FormData(form);
+      const data = {
+        firmName: formData.get('firmName'),
+        urlPrefix: formData.get('urlPrefix'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        address: formData.get('address'),
+        services: [...formData.getAll('services')],
+        sections: [...formData.getAll('sections')],
+        primaryColor: formData.get('primaryColor')
+      };
+      
+      console.log('Submitting data:', data);
+      
+      // Handle logo file
+      const logoFile = formData.get('logo');
+      if (logoFile && logoFile.size > 0) {
+        const reader = new FileReader();
+        const logoPromise = new Promise((resolve) => {
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(logoFile);
+        });
+        data.logo = await logoPromise;
+      }
+      
+      // Submit to Netlify function
+      console.log('Calling Netlify function...');
+      const response = await fetch('/.netlify/functions/create-site', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      console.log('Response status:', response.status);
+      const result = await response.json();
+      console.log('Response data:', result);
+      
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to create website');
+      }
+      
+      // Show success message
+      form.innerHTML = `
+        <div class="text-center py-12">
+          <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="text-2xl font-bold mb-4">Your Website Is Being Created!</h2>
+          <p class="text-gray-600 mb-8">
+            We'll send you an email at ${data.email} once your site is ready.<br>
+            Your site will be available at: <strong>${data.urlPrefix}.netlify.app</strong>
+          </p>
+          <a href="/" class="text-red-800 hover:text-red-700">← Back to Home</a>
+        </div>
+      `;
+    } catch (error) {
+      console.error('Error details:', error);
+      // Show error message
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'bg-red-50 text-red-800 p-4 rounded-lg mt-6';
+      errorDiv.innerHTML = `
+        <p class="font-medium">Error creating your website</p>
+        <p class="text-sm">${error.message}</p>
+        <pre class="text-xs mt-2 overflow-auto">${JSON.stringify(error, null, 2)}</pre>
+      `;
+      submitButton.parentNode.appendChild(errorDiv);
+      
+      // Reset button
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Create My Website';
+    }
+  });
+</script> 

@@ -9,5 +9,12 @@ export default defineConfig({
     mdx()
   ],
   output: 'static',
-  adapter: netlify()
+  adapter: netlify(),
+  vite: {
+    assetsInclude: ['**/*.jpg', '**/*.svg'],
+    build: {
+      assetsDir: 'assets',
+      copyPublicDir: true
+    }
+  }
 });
