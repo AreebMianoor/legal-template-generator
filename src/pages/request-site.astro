@@ -1,0 +1,460 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  'Permanent Residence',
+  'Temporary Residence',
+  'Business Immigration',
+  'Family Sponsorship',
+  'Study Permits',
+  'Work Permits',
+  'Citizenship',
+  'Appeals & Rehabilitation'
+];
+
+const contentSections = [
+  { id: 'hero', label: 'Hero Section with Custom Banner' },
+  { id: 'services', label: 'Services Showcase' },
+  { id: 'caseStudies', label: 'Case Studies' },
+  { id: 'testimonials', label: 'Client Testimonials' },
+  { id: 'team', label: 'Team Members' },
+  { id: 'contact', label: 'Contact Form' },
+  { id: 'partners', label: 'Partner Companies' }
+];
+---
+
+<Layout title="Create Your Law Firm Website | Site Request Form">
+  <div class="pt-20 pb-16 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4">Create Your Law Firm Website</h1>
+        <p class="text-xl text-gray-600">Complete the form below to get your customized immigration law website</p>
+      </div>
+
+      <form id="siteRequestForm" class="bg-white rounded-xl shadow-lg p-8">
+        <!-- Progress Steps -->
+        <div class="flex justify-between mb-8">
+          <div class="flex-1 text-center">
+            <div class="w-8 h-8 bg-red-800 text-white rounded-full mx-auto flex items-center justify-center step-indicator">1</div>
+            <span class="text-sm mt-1">Basic Info</span>
+          </div>
+          <div class="flex-1 text-center">
+            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center step-indicator">2</div>
+            <span class="text-sm mt-1">Content</span>
+          </div>
+          <div class="flex-1 text-center">
+            <div class="w-8 h-8 bg-gray-200 text-gray-600 rounded-full mx-auto flex items-center justify-center step-indicator">3</div>
+            <span class="text-sm mt-1">Design</span>
+          </div>
+        </div>
+
+        <!-- Step 1: Basic Information -->
+        <div class="space-y-6 step-content" id="step1">
+          <h2 class="text-2xl font-semibold">Firm Information</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Firm Name</label>
+              <input 
+                type="text" 
+                name="firmName" 
+                required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-800 focus:border-red-800"
+                placeholder="Your Law Firm Name"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Website URL Prefix</label>
+              <div class="flex items-center">
+                <input 
+                  type="text" 
+                  name="urlPrefix" 
+                  required
+                  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-800 focus:border-red-800"
+                  placeholder="your-firm-name"
+                />
+                <span class="ml-2 text-gray-500">.netlify.app</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-800 focus:border-red-800"
+                placeholder="contact@yourfirm.com"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <input 
+                type="tel" 
+                name="phone" 
+                required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-800 focus:border-red-800"
+                placeholder="(123) 456-7890"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Office Address</label>
+            <textarea 
+              name="address" 
+              required
+              rows="2"
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-800 focus:border-red-800"
+              placeholder="123 Law Street, Suite 100&#10;City, Province A1B 2C3"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Step 2: Services & Content -->
+        <div class="space-y-6 step-content hidden" id="step2">
+          <h2 class="text-2xl font-semibold">Services & Content</h2>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-3">Select Your Services</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {services.map(service => (
+                <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    name="services" 
+                    value={service}
+                    class="h-4 w-4 text-red-800 focus:ring-red-800 border-gray-300 rounded"
+                  />
+                  <span>{service}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-3">Choose Content Sections</label>
+            <div class="space-y-3">
+              {contentSections.map(section => (
+                <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    name="sections" 
+                    value={section.id}
+                    checked={section.id !== 'partners'}
+                    class="h-4 w-4 text-red-800 focus:ring-red-800 border-gray-300 rounded"
+                  />
+                  <span>{section.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Design Preferences -->
+        <div class="space-y-6 step-content hidden" id="step3">
+          <h2 class="text-2xl font-semibold">Design Preferences</h2>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Primary Color</label>
+            <div class="flex items-center space-x-4">
+              <label class="flex items-center space-x-2">
+                <input 
+                  type="radio" 
+                  name="primaryColor" 
+                  value="red" 
+                  checked
+                  class="text-red-800 focus:ring-red-800"
+                />
+                <span class="w-6 h-6 bg-red-800 rounded-full"></span>
+                <span>Red</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input 
+                  type="radio" 
+                  name="primaryColor" 
+                  value="blue"
+                  class="text-blue-800 focus:ring-blue-800"
+                />
+                <span class="w-6 h-6 bg-blue-800 rounded-full"></span>
+                <span>Blue</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input 
+                  type="radio" 
+                  name="primaryColor" 
+                  value="green"
+                  class="text-green-800 focus:ring-green-800"
+                />
+                <span class="w-6 h-6 bg-green-800 rounded-full"></span>
+                <span>Green</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-3">Logo Upload</label>
+            <div class="flex items-center justify-center w-full">
+              <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500">Click to upload your logo</p>
+                  <p class="text-xs text-gray-500">SVG, PNG, JPG (MAX. 800x400px)</p>
+                </div>
+                <input type="file" name="logo" class="hidden" accept="image/*" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-6 border-t">
+            <div class="flex justify-between">
+              <button 
+                type="button"
+                class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors font-medium text-lg prev-step"
+              >
+                Previous
+              </button>
+              <button 
+                type="submit"
+                class="bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg"
+              >
+                Create My Website
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('siteRequestForm');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const stepContents = document.querySelectorAll('.step-content');
+  
+  // Step Navigation
+  let currentStep = 1;
+  const totalSteps = 3;
+  
+  function updateStepIndicators() {
+    document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+      if (index + 1 === currentStep) {
+        indicator.classList.remove('bg-gray-200', 'text-gray-600');
+        indicator.classList.add('bg-red-800', 'text-white');
+      } else if (index + 1 < currentStep) {
+        indicator.classList.remove('bg-gray-200', 'text-gray-600');
+        indicator.classList.add('bg-green-500', 'text-white');
+      } else {
+        indicator.classList.remove('bg-red-800', 'text-white', 'bg-green-500');
+        indicator.classList.add('bg-gray-200', 'text-gray-600');
+      }
+    });
+  }
+
+  function showStep(step) {
+    stepContents.forEach((content, index) => {
+      if (index + 1 === step) {
+        content.classList.remove('hidden');
+      } else {
+        content.classList.add('hidden');
+      }
+    });
+    updateStepIndicators();
+  }
+
+  function validateStep(stepNumber) {
+    const stepContent = stepContents[stepNumber - 1];
+    const requiredInputs = stepContent.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+
+    requiredInputs.forEach(input => {
+      if (!input.value.trim()) {
+        isValid = false;
+        input.classList.add('border-red-500');
+        
+        // Add error message if not exists
+        if (!input.nextElementSibling?.classList.contains('error-message')) {
+          const errorMsg = document.createElement('p');
+          errorMsg.className = 'text-red-500 text-sm mt-1 error-message';
+          errorMsg.textContent = 'This field is required';
+          input.parentNode.insertBefore(errorMsg, input.nextSibling);
+        }
+      } else {
+        input.classList.remove('border-red-500');
+        const errorMsg = input.nextElementSibling;
+        if (errorMsg?.classList.contains('error-message')) {
+          errorMsg.remove();
+        }
+      }
+    });
+
+    return isValid;
+  }
+
+  // Add next buttons to steps
+  stepContents.forEach((content, index) => {
+    if (index < totalSteps - 1) {
+      const nextButton = document.createElement('button');
+      nextButton.type = 'button';
+      nextButton.className = 'w-full bg-red-800 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium text-lg mt-6';
+      nextButton.textContent = 'Next Step';
+      nextButton.onclick = () => {
+        if (validateStep(currentStep)) {
+          currentStep++;
+          showStep(currentStep);
+        }
+      };
+      content.appendChild(nextButton);
+    }
+  });
+
+  // Add input validation on change
+  document.querySelectorAll('input[required], textarea[required]').forEach(input => {
+    input.addEventListener('input', () => {
+      if (input.value.trim()) {
+        input.classList.remove('border-red-500');
+        const errorMsg = input.nextElementSibling;
+        if (errorMsg?.classList.contains('error-message')) {
+          errorMsg.remove();
+        }
+      }
+    });
+  });
+
+  // Add previous step functionality
+  document.querySelectorAll('.prev-step').forEach(button => {
+    button.onclick = () => {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    };
+  });
+
+  // Show initial step
+  showStep(1);
+
+  // Form submission handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log('Form submitted');
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Creating Your Website...
+    `;
+    
+    try {
+      // Gather form data
+      const formData = new FormData(form);
+      const data = {
+        firmName: formData.get('firmName'),
+        urlPrefix: formData.get('urlPrefix'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        address: formData.get('address'),
+        services: [...formData.getAll('services')],
+        sections: [...formData.getAll('sections')],
+        primaryColor: formData.get('primaryColor')
+      };
+      
+      console.log('Submitting data:', data);
+      
+      // Handle logo file
+      const logoFile = formData.get('logo');
+      if (logoFile && logoFile.size > 0) {
+        const reader = new FileReader();
+        const logoPromise = new Promise((resolve) => {
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(logoFile);
+        });
+        data.logo = await logoPromise;
+      }
+      
+      // Submit to Netlify function
+      console.log('Calling Netlify function...');
+      const response = await fetch('/.netlify/functions/create-site', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      console.log('Response status:', response.status);
+      const result = await response.json();
+      console.log('Response data:', result);
+      
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to create website');
+      }
+      
+      // Show success message
+      form.innerHTML = `
+        <div class="text-center py-12">
+          <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="text-2xl font-bold mb-4">Your Website Is Being Created!</h2>
+          <p class="text-gray-600 mb-4">
+            We'll send you an email at ${data.email} once your site is ready.
+          </p>
+          <div class="space-y-2 mb-8">
+            <p class="font-medium">Your website will be available at:</p>
+            <a 
+              href="${result.site.url}" 
+              target="_blank" 
+              class="text-red-800 hover:text-red-700 block"
+            >
+              ${result.site.url}
+            </a>
+            <p class="text-sm text-gray-500 mt-2">
+              (The site may take a few minutes to be fully deployed)
+            </p>
+          </div>
+          <div class="space-y-2">
+            <p class="font-medium">Manage your site at:</p>
+            <a 
+              href="${result.site.adminUrl}" 
+              target="_blank" 
+              class="text-red-800 hover:text-red-700 block"
+            >
+              Netlify Admin Dashboard
+            </a>
+          </div>
+          <a href="/" class="inline-block mt-8 text-red-800 hover:text-red-700">← Back to Home</a>
+        </div>
+      `;
+
+      // Open the new site in a new tab
+      window.open(result.site.url, '_blank');
+    } catch (error) {
+      console.error('Error details:', error);
+      // Show error message
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'bg-red-50 text-red-800 p-4 rounded-lg mt-6';
+      errorDiv.innerHTML = `
+        <p class="font-medium">Error creating your website</p>
+        <p class="text-sm">${error.message}</p>
+      `;
+      submitButton.parentNode.appendChild(errorDiv);
+      
+      // Reset button
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Create My Website';
+    }
+  });
+</script> 

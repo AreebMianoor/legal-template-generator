@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "astro dev"
+  targetPort = 4321
+  port = 8888
+  autoLaunch = true
+  framework = "#custom"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/.netlify/functions/create-site"
+  to = "/.netlify/functions/create-site"
+  status = 200
+  force = true
+  methods = ["POST", "OPTIONS"] 

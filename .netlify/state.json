@@ -1,3 +1,21 @@
 {
-	"siteId": "66a9854d-805a-43b9-b54d-debac6da87c4"
+	"siteId": "66a9854d-805a-43b9-b54d-debac6da87c4",
+	"geolocation": {
+		"data": {
+			"city": "Toronto",
+			"country": {
+				"code": "CA",
+				"name": "Canada"
+			},
+			"subdivision": {
+				"code": "ON",
+				"name": "Ontario"
+			},
+			"timezone": "America/Toronto",
+			"latitude": 43.6547,
+			"longitude": -79.3623,
+			"postalCode": "M5A"
+		},
+		"timestamp": 1735498373381
+	}
 }
