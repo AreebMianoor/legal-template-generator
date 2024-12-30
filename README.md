@@ -1,6 +1,29 @@
 # LegalTech Site Generator & AI Integration Platform
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-netlify-id/deploy-status)](https://app.netlify.com/sites/your-site/deploys)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Astro](https://img.shields.io/badge/Astro-4.x-orange.svg)](https://astro.build)
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+
+> 🚀 **Quick Start**: `npx create-legal-site@latest my-law-firm`
+
+[Live Demo](your-demo-url) | [Documentation](your-docs-url) | [Contributing](CONTRIBUTING.md) | [Report Bug](issues)
+
 A next-generation platform for law firms to establish their digital presence and leverage AI capabilities in minutes. Built with modern web technologies and AI integration capabilities, this platform revolutionizes how legal professionals connect with their clients and manage their online presence.
+
+<p align="center">
+  <img src="docs/preview.gif" alt="LegalTech Platform Preview" width="600">
+</p>
+
+### Why This Matters
+
+The legal industry is undergoing a digital transformation, but many firms lack the resources or technical expertise to keep up. This platform bridges that gap by providing:
+
+- 🎯 Instant professional web presence
+- 🤖 Built-in AI capabilities
+- 📱 Mobile-first design
+- 🔒 Compliance-ready architecture
+- ⚡ Performance-optimized structure
 
 ## 🚀 Vision
 
