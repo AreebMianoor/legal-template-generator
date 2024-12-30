@@ -88,6 +88,40 @@ The goal is to democratize access to advanced legal tech tools, allowing firms o
    npm run dev
    ```
 
+### Environment Variables Setup
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Required for development
+SITE_URL=http://localhost:4321
+
+# Netlify Function URLs (update after deployment)
+NETLIFY_FUNCTION_URL=/.netlify/functions
+
+# Optional: AI Integration (if using AI features)
+OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_gemini_api_key
+
+# Optional: Analytics (if using analytics)
+GOOGLE_ANALYTICS_ID=your_ga_id
+
+# Example values for local development:
+# SITE_URL=http://localhost:4321
+# NETLIFY_FUNCTION_URL=/.netlify/functions
+# OPENAI_API_KEY=sk-xxxxx...
+# GEMINI_API_KEY=AI-xxxx...
+```
+
+> **Note**: Never commit your `.env` file to version control. The above values are examples only.
+
+For production deployment on Netlify:
+1. Go to your site's dashboard
+2. Navigate to Site Settings > Environment Variables
+3. Add each variable from your `.env` file
+4. Update `SITE_URL` to your production URL
+5. Deploy your site to apply the changes
+
 ## 🔧 Customization
 
 The platform is designed for easy customization:
