@@ -7,7 +7,7 @@
 
 > 🚀 **Quick Start**: `npx create-legal-site@latest my-law-firm`
 
-[Live Demo](your-demo-url) | [Documentation](your-docs-url) | [Contributing](CONTRIBUTING.md) | [Report Bug](issues)
+[Live Demo](https://antlegaltemplate.netlify.app/) | [Documentation](your-docs-url) | [Contributing](CONTRIBUTING.md) | [Report Bug](issues)
 
 A next-generation platform for law firms to establish their digital presence and leverage AI capabilities in minutes. Built with modern web technologies and AI integration capabilities, this platform revolutionizes how legal professionals connect with their clients and manage their online presence.
 
